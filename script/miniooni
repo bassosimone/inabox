@@ -3,3 +3,6 @@ set -ex
 go get -v github.com/ooni/probe-engine/cmd/miniooni
 miniooni="$(go env GOPATH)/bin/miniooni --probe-services $(cat ./config/backend/https)"
 $miniooni -i http://mail.google.com web_connectivity
+$miniooni sni_blocking
+$miniooni tor
+$miniooni psiphon
