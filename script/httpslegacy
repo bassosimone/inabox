@@ -3,6 +3,6 @@ set -ex
 brew install ooniprobe
 install -d $HOME/.ooni
 touch $HOME/.ooni/initialized
-cp config/ooniprobe.conf $HOME/.ooni/
-ooniprobe -P https --bouncer=https://ams-pg.ooni.org  \
+cp config/legacy/ooniprobe.conf $HOME/.ooni/
+ooniprobe -P https --bouncer=$(cat ./config/backend/https)  \
     web_connectivity -u http://mail.google.com
