@@ -1,0 +1,5 @@
+#!/bin/bash
+set -ex
+brew install ooniprobe
+ooniprobe --initialize --bouncer=httpo://guegdifjy7bjpequ.onion  \
+    web_connectivity -u http://mail.google.com
