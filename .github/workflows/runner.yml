@@ -11,9 +11,9 @@ jobs:
       fail-fast: false
       matrix:
         runner:
-        - easylegacy
         - measurementkit
         - miniooni
+        - onionlegacy
     steps:
       - if: "${{ matrix.runner == 'miniooni' }}"
         uses: actions/setup-go@v1
