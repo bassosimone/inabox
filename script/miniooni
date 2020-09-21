@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x
+set -ex
 go get -v github.com/ooni/probe-engine/cmd/miniooni
 miniooni="$(go env GOPATH)/bin/miniooni --probe-services https://ams-pg.ooni.org/"
 $miniooni -i http://mail.google.com web_connectivity
