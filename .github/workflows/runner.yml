@@ -15,7 +15,7 @@ jobs:
         - measurementkit
         - miniooni
     steps:
-      - if: "${{ matrix.runner }}" == "miniooni"
+      - if: "${{ matrix.runner == 'miniooni' }}"
         uses: actions/setup-go@v1
         with:
           go-version: "1.14"
