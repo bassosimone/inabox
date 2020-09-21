@@ -1,5 +1,19 @@
 #!/bin/bash
 set -ex
 brew install ooniprobe
-ooniprobe --initialize --bouncer=httpo://guegdifjy7bjpequ.onion  \
+install -d $HOME/.ooni
+touch $HOME/.ooni/initialized
+echo << EOF
+basic:
+privacy:
+    includeip: false
+    includeasn: true
+    includecountry: true
+reports:
+    upload: true
+advanced:
+    preferred_backend: onion
+tor:
+> $HOME/.ooni/ooniprobe.conf
+ooniprobe --bouncer=httpo://guegdifjy7bjpequ.onion  \
     web_connectivity -u http://mail.google.com
