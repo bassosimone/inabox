@@ -1,5 +1,4 @@
 // +build ignore
-// +build forcetesting
 
 package main
 
