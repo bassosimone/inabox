@@ -1,3 +1,3 @@
-# github.com/ooni/inabox
+# github.com/ooni/e2etesting
 
-Check whether probes work with OONI backends.
+End to end testing of OONI probes and backends.
