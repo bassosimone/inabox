@@ -1,0 +1,14 @@
+name: fetchback
+on:
+  pull_request:
+  push:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-go@v1
+        with:
+          go-version: "1.14"
+      - uses: actions/checkout@v2
+      - run: sudo apt install jq
+      - run: ./script/fetchbacktest
