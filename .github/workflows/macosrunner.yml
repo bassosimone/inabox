@@ -1,0 +1,23 @@
+name: macosrunner
+on:
+  pull_request:
+  push:
+  schedule:
+    - cron: "*/15 * * * *"
+jobs:
+  test:
+    runs-on: macos-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        runner:
+        - legacydarwin
+        - measurementkit
+        - miniooni
+    steps:
+      - if: "${{ matrix.runner == 'miniooni' }}"
+        uses: actions/setup-go@v1
+        with:
+          go-version: "1.14"
+      - uses: actions/checkout@v2
+      - run: "./script/${{ matrix.runner }}"

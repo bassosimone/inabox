@@ -1,4 +1,4 @@
-name: runner
+name: dockerrunner
 on:
   pull_request:
   push:
@@ -6,14 +6,12 @@ on:
     - cron: "*/15 * * * *"
 jobs:
   test:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         runner:
-        - legacydarwin
         - legacydebian9
-        - measurementkit
         - miniooni
     steps:
       - if: "${{ matrix.runner == 'miniooni' }}"
