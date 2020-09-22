@@ -1,8 +1,0 @@
-#!/bin/bash
-set -ex
-brew install ooniprobe
-install -d $HOME/.ooni
-touch $HOME/.ooni/initialized
-cp config/legacy/ooniprobe.conf $HOME/.ooni/
-ooniprobe --bouncer=$(cat ./config/backend/onion)  \
-    web_connectivity -u http://mail.google.com

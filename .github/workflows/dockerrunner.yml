@@ -1,4 +1,4 @@
-name: runner
+name: dockerrunner
 on:
   pull_request:
   push:
@@ -6,15 +6,13 @@ on:
     - cron: "*/15 * * * *"
 jobs:
   test:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         runner:
-        - httpslegacy
-        - measurementkit
+        - legacydebian9
         - miniooni
-        - onionlegacy
     steps:
       - if: "${{ matrix.runner == 'miniooni' }}"
         uses: actions/setup-go@v1

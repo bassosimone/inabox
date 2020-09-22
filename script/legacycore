@@ -1,0 +1,17 @@
+#!/bin/bash
+set -ex
+
+# Surprisingly Debian9 uses /var/lib/ooni as opposed to $HOME/.ooni
+real_ooni_home=$HOME/.ooni
+if [[ "$1" != "" ]]; then
+    real_ooni_home=$1
+fi
+install -d $real_ooni_home
+touch $real_ooni_home/initialized
+
+ooniprobe -P https --bouncer=$(cat ./config/backend/https)  \
+    web_connectivity -u http://mail.google.com
+
+ooniprobe --bouncer=$(cat ./config/backend/onion)  \
+    web_connectivity -u http://mail.google.com
+ 
