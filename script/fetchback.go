@@ -42,7 +42,7 @@ type Config struct {
 	// Client is the optional HTTP client.
 	Client *http.Client
 
-	// BaseURL is the optiona base URL.
+	// BaseURL is the optional base URL.
 	BaseURL string
 }
 
@@ -64,7 +64,7 @@ type MeasurementMeta struct {
 	TestStartTime        time.Time `json:"test_start_time"`
 
 	// This field is only included if the user has specified
-	// the full option, otherwise it's an empty string.
+	// the config.Full option, otherwise it's empty.
 	RawMeasurement string `json:"raw_measurement"`
 
 	// This field contains the body that we received from the
@@ -107,6 +107,8 @@ func GetMeasurementMeta(ctx context.Context, config Config) (MeasurementMeta, er
 	}
 	config.Debugf("< %d", resp.StatusCode)
 	defer resp.Body.Close()
+	// TODO(bassosimone): this would be nice to have in most
+	// github.com/ooni/probe-engine/probeservices APIs.
 	reader := io.LimitReader(resp.Body, 1<<25)
 	body, err := ioutil.ReadAll(reader)
 	if err != nil {

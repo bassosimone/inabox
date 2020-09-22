@@ -14,3 +14,8 @@ go run ./script/fetchback.go -report-id \
 go run ./script/fetchback.go -report-id \
     20200316T221937Z_AS4181_rdC4mBUM3RA2Qks35LXLEhZ6ZG8Sm8TDkuXEE2tRNUkOMc0QEe \
         -input http://emule.com/ | jq
+
+# measurement from the past w/o input where we fetch the body
+go run ./script/fetchback.go -report-id \
+    20200316T235734Z_AS263661_Atm2zllNr3miHas1LYumAHNtuuFsqV7lCDVqWTEvQfYnuSZvaX \
+    -full | jq
