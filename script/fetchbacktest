@@ -1,0 +1,21 @@
+#!/bin/bash
+set -ex
+
+# TODO(bassosimone): consider writing more comprehensive tests. At the same
+# time consider that the backend has good coverage. We should still probably
+# ensure we're getting the expected result to validate _our_ code.
+
+# measurement from the past where the input doesn't matter
+go run ./script/fetchback.go -report-id \
+    20200316T235941Z_AS14522_uY1btNTrufkzxq1sIQ5s4TgcEjPiTmnXTN0jdj1N64GJUVIV5e \
+        | jq
+
+# measurement from the past where the input matters
+go run ./script/fetchback.go -report-id \
+    20200316T221937Z_AS4181_rdC4mBUM3RA2Qks35LXLEhZ6ZG8Sm8TDkuXEE2tRNUkOMc0QEe \
+        -input http://emule.com/ | jq
+
+# measurement from the past w/o input where we fetch the body
+go run ./script/fetchback.go -report-id \
+    20200316T235734Z_AS263661_Atm2zllNr3miHas1LYumAHNtuuFsqV7lCDVqWTEvQfYnuSZvaX \
+    -full | jq
