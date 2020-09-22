@@ -1,0 +1,4 @@
+#!/bin/bash
+set -ex
+docker build -t legacydebian8 ./docker/legacydebian8
+docker run -v`pwd`:/ooni -w/ooni legacydebian8 ./script/legacycore /var/lib/ooni
