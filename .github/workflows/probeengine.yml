@@ -25,5 +25,4 @@ jobs:
           go-version: "1.14"
       - uses: actions/checkout@v2
       - run: git clone --branch "${{ matrix.version }}" --depth 1 https://github.com/ooni/probe-engine
-      - run: cd probe-engine
-      - run: go build -v ./cmd/miniooni
+      - run: cd probe-engine && go build -o ../miniooni -v ./cmd/miniooni
