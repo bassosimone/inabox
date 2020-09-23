@@ -7,15 +7,10 @@ on:
 jobs:
   test:
     runs-on: macos-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        runner:
-        - measurementkit
     steps:
       - uses: actions/setup-go@v1
         with:
           go-version: "1.14"
       - uses: actions/checkout@v2
-      - run: "./script/${{ matrix.runner }}"
+      - run: ./script/measurementkit https://ams-pg.ooni.org
       - run: go run ./script/postprocess.go
