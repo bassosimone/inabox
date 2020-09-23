@@ -1,0 +1,31 @@
+name: "probeengine2"
+on:
+  pull_request:
+  push:
+  schedule:
+    - cron: "0 */4 * * *"
+jobs:
+  test:
+    runs-on: "ubuntu-18.04"
+    strategy:
+      fail-fast: false
+      matrix:
+        version:
+        - "7ac6a37960"  # v0.9.0+patches
+        - "4bcf3efabf"  # v0.10.0
+        - "v0.11.0"
+        options:
+        - "--bouncer=https://ams-pg.ooni.org -o output/miniooni.jsonl"
+    steps:
+      - uses: actions/setup-go@v1
+        with:
+          go-version: "1.14"
+      - uses: actions/checkout@v2
+      - run: git clone https://github.com/ooni/probe-engine
+      - run: cd probe-engine && git checkout "${{ matrix.version }}"
+      - run: cd probe-engine && go build -tags nomk -o ../miniooni -v ./cmd/miniooni
+      - run: ./miniooni ${{ matrix.options }} -i http://mail.google.com web_connectivity
+      - run: ./miniooni ${{ matrix.options }} sni_blocking
+      - run: ./miniooni ${{ matrix.options }} tor
+      - run: ./miniooni ${{ matrix.options }} psiphon
+      - run: go run ./script/postprocess.go
