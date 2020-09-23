@@ -18,7 +18,7 @@ jobs:
         - "v0.13.2"
         - "v0.11.0"
         options:
-        - "--probe-services=https://ams-pg.ooni.org -o output/miniooni.jsonl"
+        - --probe-services=https://ams-pg.ooni.org -o output/miniooni.jsonl
     steps:
       - uses: actions/setup-go@v1
         with:
