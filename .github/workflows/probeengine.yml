@@ -17,8 +17,8 @@ jobs:
         - "4bcf3efabf"
         - "v0.13.2"
         - "v0.11.0"
-        probe-services:
-        - "https://ams-pg.ooni.org"
+        run-cmd:
+        - "./miniooni --probe-services=https://ams-pg.ooni.org -o output/miniooni.jsonl"
     steps:
       - uses: actions/setup-go@v1
         with:
@@ -27,12 +27,8 @@ jobs:
       - run: git clone https://github.com/ooni/probe-engine
       - run: cd probe-engine && git checkout "${{ matrix.version }}"
       - run: cd probe-engine && go build -tags nomk -o ../miniooni -v ./cmd/miniooni
-      - run: ./miniooni --probe-services="${{ matrix.probe-services}}" \
-                -o output/miniooni.jsonl -i http://mail.google.com web_connectivity
-      - run: ./miniooni --probe-services="${{ matrix.probe-services}}" \
-                -o output/miniooni.jsonl sni_blocking
-      - run: ./miniooni --probe-services="${{ matrix.probe-services}}" \
-                -o output/miniooni.jsonl tor
-      - run: ./miniooni --probe-services="${{ matrix.probe-services}}" \
-                -o output/miniooni.jsonl psiphon
+      - run: "${{ matrix.run-cmd }}" -i http://mail.google.com web_connectivity
+      - run: "${{ matrix.run-cmd }}" sni_blocking
+      - run: "${{ matrix.run-cmd }}" tor
+      - run: "${{ matrix.run-cmd }}" psiphon
       - run: go run ./script/postprocess.go
