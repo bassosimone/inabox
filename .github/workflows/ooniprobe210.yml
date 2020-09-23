@@ -1,4 +1,4 @@
-name: legacydebian9
+name: ooniprobe210
 on:
   pull_request:
   push:
@@ -10,12 +10,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        runner:
-        - legacydebian9
+        options:
+        - "/var/lib/ooni https://ams-pg.ooni.org httpo://guegdifjy7bjpequ.onion"
     steps:
       - uses: actions/setup-go@v1
         with:
           go-version: "1.14"
       - uses: actions/checkout@v2
-      - run: "./script/${{ matrix.runner }}"
+      - run: docker build -t ooniprobe210 ./docker/ooniprobe210
+      - run: docker run -v`pwd`:/ooni -w/ooni ooniprobe210 ./script/legacycore ${{ matrix.options }}
       - run: go run ./script/postprocess.go

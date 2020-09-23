@@ -1,4 +1,0 @@
-#!/bin/bash
-set -ex
-docker build -t legacydebian9 ./docker/legacydebian9
-docker run -v`pwd`:/ooni -w/ooni legacydebian9 ./script/legacycore /var/lib/ooni
