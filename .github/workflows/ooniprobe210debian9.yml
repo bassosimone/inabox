@@ -6,17 +6,13 @@ on:
     - cron: "0 */4 * * *"
 jobs:
   test:
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        options:
-        - "/var/lib/ooni https://ams-pg.ooni.org httpo://guegdifjy7bjpequ.onion"
+    runs-on: macos-latest
     steps:
       - uses: actions/setup-go@v1
         with:
           go-version: "1.14"
       - uses: actions/checkout@v2
-      - run: docker build -t x ./docker/ooniprobe210debian9
-      - run: docker run -v`pwd`:/ooni -w/ooni x ./script/ooniprobe ${{ matrix.options }}
+      - run: vagrant plugin install vagrant-scp
+      - run: cd ./vagrant/ooniprobe210debian9 && vagrant up
+      - run: cd ./vagrant/ooniprobe210debian9 && vagrant scp :/vagrant/*.jsonl ../../output/
       - run: go run ./script/postprocess.go
