@@ -28,7 +28,6 @@ pyasn1==0.2.3
 pycparser==2.17
 pycrypto==2.6.1
 pydumbnet==1.12.1
-pygobject==3.22.0
 pyparsing==2.2.0
 pypcap==1.2.1
 pyptlib==0.0.6
