@@ -38,6 +38,9 @@ func main() {
 		return nil
 	})
 	fatalOnError(err)
+	if len(files) <= 0 {
+		log.Fatal("no files to process?!")
+	}
 	for _, file := range files {
 		data, err := ioutil.ReadFile(file)
 		fatalOnError(err)
