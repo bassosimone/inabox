@@ -1,4 +1,4 @@
-name: ooniprobe210
+name: ooniprobe210debian9
 on:
   pull_request:
   push:
@@ -17,6 +17,6 @@ jobs:
         with:
           go-version: "1.14"
       - uses: actions/checkout@v2
-      - run: docker build -t ooniprobe210 ./docker/ooniprobe210
-      - run: docker run -v`pwd`:/ooni -w/ooni ooniprobe210 ./script/ooniprobe ${{ matrix.options }}
+      - run: docker build -t x ./docker/ooniprobe210debian9
+      - run: docker run -v`pwd`:/ooni -w/ooni x ./script/ooniprobe ${{ matrix.options }}
       - run: go run ./script/postprocess.go

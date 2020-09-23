@@ -1,4 +1,4 @@
-name: ooniprobe220
+name: ooniprobe220pip
 on:
   pull_request:
   push:
@@ -12,9 +12,9 @@ jobs:
       matrix:
         runner:
         - debian:8
-        - debian:9
+        - ubuntu:16.04
         command:
-        - "./script/ooniprobe220deb /var/lib/ooni https://ams-pg.ooni.org httpo://guegdifjy7bjpequ.onion"
+        - "./script/ooniprobe220pip /var/lib/ooni https://ams-pg.ooni.org httpo://guegdifjy7bjpequ.onion"
     steps:
       - uses: actions/setup-go@v1
         with:
