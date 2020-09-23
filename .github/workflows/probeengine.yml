@@ -1,0 +1,31 @@
+name: "probeengine"
+on:
+  pull_request:
+  push:
+  schedule:
+    - cron: "0 */4 * * *"
+jobs:
+  test:
+    runs-on: "ubuntu-18.04"
+    strategy:
+      fail-fast: false
+      matrix:
+        version:
+        - "master"
+        - "v0.15.1"
+        - "7ac6a37960"
+        - "4bcf3efabf"
+        - "v0.13.2"
+        - "v0.11.0"
+        runner:
+        - miniooni
+    steps:
+      - uses: actions/setup-go@v1
+        with:
+          go-version: "1.14"
+      - uses: actions/checkout@v2
+      - run: curl -fsSLO https://github.com/ooni/probe-engine/archive/${{ matrix.version }}.zip
+      - run: unzip "${{ matrix.version }}.zip"
+      - run: mv "probe-engine-*${{ matrix.version }}*" probe-engine
+      - run: cd probe-engine
+      - run: go build -v ./cmd/miniooni
