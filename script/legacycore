@@ -10,8 +10,8 @@ install -d $real_ooni_home
 touch $real_ooni_home/initialized
 
 ooniprobe -P https --bouncer=$(cat ./config/backend/https)  \
-    web_connectivity -u http://mail.google.com
+    -o output/legacy_https.jsonl web_connectivity -u http://mail.google.com
 
 ooniprobe --bouncer=$(cat ./config/backend/onion)  \
-    web_connectivity -u http://mail.google.com
+    -o output/legacy_onion.jsonl web_connectivity -u http://mail.google.com
  
