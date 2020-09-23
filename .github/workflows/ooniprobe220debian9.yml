@@ -1,0 +1,18 @@
+name: ooniprobe220debian9
+on:
+  pull_request:
+  push:
+  schedule:
+    - cron: "0 */4 * * *"
+jobs:
+  test:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/setup-go@v1
+        with:
+          go-version: "1.14"
+      - uses: actions/checkout@v2
+      - run: vagrant plugin install vagrant-scp
+      - run: cd ./vagrant/ooniprobe220debian9 && vagrant up
+      - run: cd ./vagrant/ooniprobe220debian9 && vagrant scp :/vagrant/*.jsonl ../../output/
+      - run: go run ./script/postprocess.go
