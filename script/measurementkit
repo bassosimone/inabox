@@ -7,6 +7,7 @@ for f in asn.mmdb.gz ca-bundle.pem.gz country.mmdb.gz; do
   gunzip -f $f
 done
 measurement_kit --bouncer $(cat ./config/backend/https)  \
+                -o output/mk.jsonl                       \
                 --ca-bundle-path ca-bundle.pem           \
                 --geoip-country-path country.mmdb        \
                 --geoip-asn-path asn.mmdb                \
