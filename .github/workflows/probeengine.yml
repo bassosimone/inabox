@@ -24,8 +24,6 @@ jobs:
         with:
           go-version: "1.14"
       - uses: actions/checkout@v2
-      - run: curl -fsSLO https://github.com/ooni/probe-engine/archive/${{ matrix.version }}.zip
-      - run: unzip "${{ matrix.version }}.zip"
-      - run: mv "probe-engine-*${{ matrix.version }}*" probe-engine
+      - run: git clone --branch "${{ matrix.version }}" --depth 1 https://github.com/ooni/probe-engine
       - run: cd probe-engine
       - run: go build -v ./cmd/miniooni
