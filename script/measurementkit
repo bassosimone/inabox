@@ -6,7 +6,8 @@ for f in asn.mmdb.gz ca-bundle.pem.gz country.mmdb.gz; do
   curl -fsSLO https://github.com/ooni/probe-assets/releases/download/20200821081345/$f
   gunzip -f $f
 done
-measurement_kit --bouncer $(cat ./config/backend/https)  \
+test $# -eq 1 || exit 1
+measurement_kit --bouncer $1                             \
                 -o output/mk.jsonl                       \
                 --ca-bundle-path ca-bundle.pem           \
                 --geoip-country-path country.mmdb        \
