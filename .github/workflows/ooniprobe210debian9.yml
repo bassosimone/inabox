@@ -13,6 +13,6 @@ jobs:
           go-version: "1.14"
       - uses: actions/checkout@v2
       - run: vagrant plugin install vagrant-scp
-      - run: cd ./vagarant/ooniprobe210debian9 && vagrant up
+      - run: cd ./vagrant/ooniprobe210debian9 && vagrant up
       - run: vagrant scp :/vagrant/*.jsonl ./output/
       - run: go run ./script/postprocess.go
