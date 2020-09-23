@@ -1,4 +1,4 @@
-name: legacydarwin
+name: ooniprobe230darwin
 on:
   pull_request:
   push:
@@ -7,15 +7,11 @@ on:
 jobs:
   test:
     runs-on: macos-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        runner:
-        - legacydarwin
     steps:
       - uses: actions/setup-go@v1
         with:
           go-version: "1.14"
       - uses: actions/checkout@v2
-      - run: "./script/${{ matrix.runner }}"
+      - run: brew install ooniprobe
+      - run: ./script/ooniprobe $HOME/.ooni https://ams-pg.ooni.org httpo://guegdifjy7bjpequ.onion
       - run: go run ./script/postprocess.go
