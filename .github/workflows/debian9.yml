@@ -1,0 +1,26 @@
+name: debian9
+on:
+  pull_request:
+  push:
+  schedule:
+    - cron: "0 */4 * * *"
+jobs:
+  test:
+    runs-on: macos-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        version:
+        - "ooniprobe_2.0.2"
+        - "ooniprobe_2.1.0"
+        - "ooniprobe_2.2.0"
+        - "ooniprobe_2.3.0"
+    steps:
+      - uses: actions/setup-go@v1
+        with:
+          go-version: "1.14"
+      - uses: actions/checkout@v2
+      - run: vagrant plugin install vagrant-scp
+      - run: cd ./vagrant/debian9 && vagrant up ${{ matrix.version }}
+      - run: cd ./vagrant/debian9 && vagrant scp ${{ matrix.version }}:/vagrant/*.jsonl ../../output/
+      - run: go run ./script/postprocess.go

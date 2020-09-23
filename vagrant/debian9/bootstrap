@@ -1,0 +1,10 @@
+#!/bin/sh
+set -ex
+echo "$@" | tee -a /etc/apt/sources.list
+apt-get update
+apt-get install -y ooniprobe
+touch /var/lib/ooni/initialized
+ooniprobe -P https --bouncer=https://ams-pg.ooni.org -o /vagrant/https.jsonl \
+    web_connectivity -u http://mail.google.com
+ooniprobe -P onion --bouncer=httpo://guegdifjy7bjpequ.onion -o /vagrant/onion.jsonl \
+    web_connectivity -u http://mail.google.com

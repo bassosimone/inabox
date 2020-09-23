@@ -1,0 +1,28 @@
+Vagrant.configure("2") do |config|
+    config.vm.box = "debian/stretch64"
+
+    config.vm.define "ooniprobe_2.0.2" do |ooni|
+      ooni.vm.provision "shell", inline: <<-SHELL
+        /vagrant/bootstrap "deb [check-valid-until=no] http://snapshot.debian.org/archive/debian/20161209T214923Z/ stretch contrib"
+      SHELL
+    end
+
+    config.vm.define "ooniprobe_2.1.0" do |ooni|
+      ooni.vm.provision "shell", inline: <<-SHELL
+        /vagrant/bootstrap "deb http://deb.debian.org/debian/ stretch contrib"
+      SHELL
+    end
+
+    config.vm.define "ooniprobe_2.2.0" do |ooni|
+      ooni.vm.provision "shell", inline: <<-SHELL
+        /vagrant/bootstrap "deb [check-valid-until=no] http://snapshot.debian.org/archive/debian/20171218T153801Z/ buster contrib"
+      SHELL
+    end
+
+    config.vm.define "ooniprobe_2.3.0" do |ooni|
+      ooni.vm.provision "shell", inline: <<-SHELL
+        /vagrant/bootstrap "deb [check-valid-until=no] http://snapshot.debian.org/archive/debian/20180316T060735Z/ sid contrib"
+      SHELL
+    end
+  end
+  
