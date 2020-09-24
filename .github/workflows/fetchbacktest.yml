@@ -1,3 +1,4 @@
+# Very basic smoke test for script/fetchback.go
 name: fetchbacktest
 on:
   pull_request:

@@ -1,3 +1,7 @@
+# Ensures that recent versions of ooni/probe-engine work with the new
+# OONI API we're sketching out. As of 2020-09-24, we've not released any
+# stable version of the probe-engine yet. In any case, we always want
+# to keep master here to ensure we're not breaking things
 name: "probeengine"
 on:
   pull_request:
