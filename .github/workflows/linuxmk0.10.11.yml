@@ -1,3 +1,8 @@
+# As of 2020-09-24 we have a significant user base running ooniprobe-cli
+# from Linux systems. The version they're running contains MK 0.10.11. So
+# here we're using the docker container that built sch version.
+#
+# See also analysis at https://github.com/ooni/backend/issues/446#issuecomment-697172389.
 name: libmk0.10.11
 on:
   pull_request:

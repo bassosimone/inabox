@@ -1,3 +1,5 @@
+# Not very popular among users but yet useful to garner confidence that
+# MK is WAI, modulo possible dependencies issues.
 name: measurementkit
 on:
   pull_request:

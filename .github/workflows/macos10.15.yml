@@ -1,3 +1,7 @@
+# As of 2020-09-24 we have a significant fraction of our users running
+# ooniprobe 2.3.0 from macOS. So, here we just do that.
+#
+# See also https://github.com/ooni/backend/issues/446#issuecomment-697172389
 name: macos10.15
 on:
   pull_request:
