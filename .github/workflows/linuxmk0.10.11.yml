@@ -8,7 +8,7 @@ on:
   pull_request:
   push:
   schedule:
-    - cron: "0 */4 * * *"
+    - cron: "*/34 * * * *"
 jobs:
   test:
     runs-on: ubuntu-latest
