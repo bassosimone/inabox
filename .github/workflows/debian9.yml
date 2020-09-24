@@ -21,6 +21,8 @@ jobs:
           go-version: "1.14"
       - uses: actions/checkout@v2
       - run: vagrant plugin install vagrant-scp
-      - run: cd ./vagrant/debian9 && vagrant up ${{ matrix.version }}
-      - run: cd ./vagrant/debian9 && vagrant scp ${{ matrix.version }}:/vagrant/*.jsonl ../../output/
+      - run: vagrant up ${{ matrix.version }}
+        working-directory: ./vagrant/debian9
+      - run: vagrant scp ${{ matrix.version }}:/vagrant/*.jsonl ../../output/
+        working-directory: ./vagrant/debian9
       - run: go run ./script/postprocess.go
