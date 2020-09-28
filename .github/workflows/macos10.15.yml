@@ -7,7 +7,7 @@ on:
   pull_request:
   push:
   schedule:
-    - cron: "*/34 * * * *"
+    - cron: "10 */2 * * *"
 jobs:
   test:
     runs-on: macos-10.15
