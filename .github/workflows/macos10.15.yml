@@ -16,11 +16,14 @@ jobs:
         with:
           go-version: "1.14"
       - uses: actions/checkout@v2
+      # Limitation: we test the cloudfronted endpoint as a normal HTTPS endpoint.
       - run: |
           brew install ooniprobe
           install -d $HOME/.ooni
           touch $HOME/.ooni/initialized
           ooniprobe -P https --bouncer=https://ams-pg.ooni.org -o ./output/https.jsonl \
+            web_connectivity -u http://mail.google.com
+          ooniprobe -P https --bouncer=https://dvp6h0xblpcqp.cloudfront.net -o ./output/https.jsonl \
             web_connectivity -u http://mail.google.com
           ooniprobe -P onion --bouncer=httpo://guegdifjy7bjpequ.onion -o ./output/onion.jsonl \
             web_connectivity -u http://mail.google.com

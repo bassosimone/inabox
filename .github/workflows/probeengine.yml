@@ -18,6 +18,7 @@ jobs:
         - "master"
         options:
         - "--probe-services=https://ams-pg.ooni.org -o output/miniooni.jsonl"
+        - "--probe-services=https://dvp6h0xblpcqp.cloudfront.net -o output/miniooni.jsonl"
     steps:
       - uses: actions/setup-go@v1
         with:
