@@ -28,7 +28,6 @@ jobs:
       - run: cd probe-engine && git checkout "${{ matrix.version }}"
       - run: cd probe-engine && go build -tags nomk -o ../miniooni -v ./cmd/miniooni
       - run: ./miniooni ${{ matrix.options }} -i http://mail.google.com web_connectivity
-      - run: ./miniooni ${{ matrix.options }} sni_blocking
       - run: ./miniooni ${{ matrix.options }} tor
       - run: ./miniooni ${{ matrix.options }} psiphon
       - run: go run ./script/postprocess.go
