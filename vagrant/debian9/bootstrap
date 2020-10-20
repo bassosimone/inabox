@@ -5,9 +5,11 @@ apt-get update
 apt-get install -y ooniprobe
 touch /var/lib/ooni/initialized
 # Limitation: we test the cloudfronted endpoint as a normal HTTPS endpoint.
-ooniprobe -P https --bouncer=https://ams-pg.ooni.org -o /vagrant/https.jsonl \
+# Limitation: the original cloudfronted endpoint is no longer available, thus
+# we are testing a new endpoint we setup for this purpose.
+ooniprobe -P https -o /vagrant/https.jsonl \
     web_connectivity -u http://mail.google.com
 ooniprobe -P https --bouncer=https://dvp6h0xblpcqp.cloudfront.net -o ./output/https.jsonl \
     web_connectivity -u http://mail.google.com
-ooniprobe -P onion --bouncer=httpo://guegdifjy7bjpequ.onion -o /vagrant/onion.jsonl \
+ooniprobe -P onion -o /vagrant/onion.jsonl \
     web_connectivity -u http://mail.google.com
