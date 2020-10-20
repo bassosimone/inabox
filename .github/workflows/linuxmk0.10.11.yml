@@ -18,14 +18,12 @@ jobs:
           go-version: "1.14"
       - uses: actions/checkout@v2
       - run: |
-          bouncer=https://ams-pg.ooni.org
           for f in asn.mmdb.gz ca-bundle.pem.gz country.mmdb.gz; do
             curl -fsSLO https://github.com/ooni/probe-assets/releases/download/20200821081345/$f
             gunzip -f $f
           done
           docker run -v`pwd`:/mk -w/mk openobservatory/mk-alpine:20200226 \
-            measurement_kit --bouncer $bouncer                            \
-                -o output/mk.jsonl                                        \
+            measurement_kit -o output/mk.jsonl                            \
                 --ca-bundle-path ca-bundle.pem                            \
                 --geoip-country-path country.mmdb                         \
                 --geoip-asn-path asn.mmdb                                 \
