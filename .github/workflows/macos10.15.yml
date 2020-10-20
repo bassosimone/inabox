@@ -27,6 +27,6 @@ jobs:
             web_connectivity -u http://mail.google.com
           ooniprobe -P https --bouncer=https://dvp6h0xblpcqp.cloudfront.net -o ./output/https.jsonl \
             web_connectivity -u http://mail.google.com
-          ooniprobe -P onion ./output/onion.jsonl \
+          ooniprobe -P onion -o ./output/onion.jsonl \
             web_connectivity -u http://mail.google.com
       - run: go run ./script/postprocess.go
