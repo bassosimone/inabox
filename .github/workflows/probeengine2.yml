@@ -18,7 +18,7 @@ jobs:
         - "4bcf3efabf"  # v0.10.0
         - "v0.11.0"
         options:
-        - "--bouncer=https://ams-pg.ooni.org -o output/miniooni.jsonl"
+        - "-o output/miniooni.jsonl"
     steps:
       - uses: actions/setup-go@v1
         with:
