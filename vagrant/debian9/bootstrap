@@ -4,12 +4,40 @@ echo "$@" | tee -a /etc/apt/sources.list
 apt-get update
 apt-get install -y ooniprobe
 touch /var/lib/ooni/initialized
+
+#
 # Limitation: we test the cloudfronted endpoint as a normal HTTPS endpoint.
+#
 # Limitation: the original cloudfronted endpoint is no longer available, thus
-# we are testing a new endpoint we setup for this purpose.
+# we are testing a new endpoint we setup for this purpose:
+#
+# ```
+# % ooniprobe -P cloudfront http_invalid_request_line
+# [!] Error processing dns_spoof.py
+# [!] Error processing traceroute.py
+# Looking up your IP address via ubuntu
+# Found your IP via a GeoIP service
+# Looking up collector and test helpers with https://a0.awsstatic.com
+# Unhandled Error
+# Traceback (most recent call last):
+# Failure: ooni.errors.OONIBError:
+#
+# [!] Could not start the director
+# [!] Could not find a valid collector.
+# Try with a different bouncer, specify a collector with -c or disable reporting to a collector with -n.
+# ```
+#
+
 ooniprobe -P https -o /vagrant/https.jsonl \
     web_connectivity -u http://mail.google.com
-ooniprobe -P https --bouncer=https://dvp6h0xblpcqp.cloudfront.net -o ./output/https.jsonl \
+
+ooniprobe -P https --bouncer=https://dvp6h0xblpcqp.cloudfront.net \
+    -o ./output/cloudfront.jsonl \
     web_connectivity -u http://mail.google.com
+
 ooniprobe -P onion -o /vagrant/onion.jsonl \
+    web_connectivity -u http://mail.google.com
+
+ooniprobe -P https --bouncer=https://ams-pg-test.ooni.org \
+    -o ./output/https-test-infra.jsonl \
     web_connectivity -u http://mail.google.com
