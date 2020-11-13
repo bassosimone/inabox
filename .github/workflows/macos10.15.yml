@@ -2,6 +2,9 @@
 # ooniprobe 2.3.0 from macOS. So, here we just do that.
 #
 # See also https://github.com/ooni/backend/issues/446#issuecomment-697172389
+#
+# Status as of 2020-11-13: https://github.com/ooni/backend/issues/461#issuecomment-726587481
+# where ooniprobe 2.3.0 on macos is 17.641921% of the measurements.
 name: macos10.15
 on:
   pull_request:
@@ -16,17 +19,30 @@ jobs:
         with:
           go-version: "1.14"
       - uses: actions/checkout@v2
+      #
       # Limitation: we test the cloudfronted endpoint as a normal HTTPS endpoint.
+      #
       # Limitation: the original cloudfronted endpoint is no longer available, thus
-      # we are testing a new endpoint we setup for this purpose.
+      # we are testing a new endpoint we setup for this purpose. See the error
+      # available in vagrant/debian9/boostrap.
+      #
       - run: |
           brew install ooniprobe
           install -d $HOME/.ooni
           touch $HOME/.ooni/initialized
+
           ooniprobe -P https -o ./output/https.jsonl \
             web_connectivity -u http://mail.google.com
-          ooniprobe -P https --bouncer=https://dvp6h0xblpcqp.cloudfront.net -o ./output/https.jsonl \
+
+          ooniprobe -P https --bouncer=https://dvp6h0xblpcqp.cloudfront.net \
+            -o ./output/cloudfront.jsonl \
             web_connectivity -u http://mail.google.com
+
           ooniprobe -P onion -o ./output/onion.jsonl \
             web_connectivity -u http://mail.google.com
+          
+          ooniprobe -P https --bouncer=https://ams-pg-test.ooni.org \
+            -o ./output/https-test-infra.jsonl \
+            web_connectivity -u http://mail.google.com
+
       - run: go run ./script/postprocess.go

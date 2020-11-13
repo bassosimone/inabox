@@ -1,8 +1,11 @@
 # As of 2020-09-24 we have a significant user base running ooniprobe-cli
 # from Linux systems. The version they're running contains MK 0.10.11. So
-# here we're using the docker container that built sch version.
+# here we're using the docker container that built such version.
 #
 # See also analysis at https://github.com/ooni/backend/issues/446#issuecomment-697172389.
+#
+# We still see 1.399000% of measurements as of 2020-11-13 coming from
+# cli v3.0.0. which includes MK v0.10.11.
 name: libmk0.10.11
 on:
   pull_request:
@@ -12,6 +15,12 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        extraoptions:
+        - ""
+        - "--bouncer=https://ams-pg-test.ooni.org"
     steps:
       - uses: actions/setup-go@v1
         with:
@@ -24,6 +33,7 @@ jobs:
           done
           docker run -v`pwd`:/mk -w/mk openobservatory/mk-alpine:20200226 \
             measurement_kit -o output/mk.jsonl                            \
+                ${{ matrix.extraoptions }}                                \
                 --ca-bundle-path ca-bundle.pem                            \
                 --geoip-country-path country.mmdb                         \
                 --geoip-asn-path asn.mmdb                                 \
