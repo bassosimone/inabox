@@ -33,10 +33,12 @@ jobs:
           done
           docker run -v`pwd`:/mk -w/mk openobservatory/mk-alpine:20200226 \
             measurement_kit -o output/mk.jsonl                            \
-                {{ matrix.extraoptions }}                                 \
+                $extraoptions                                             \
                 --ca-bundle-path ca-bundle.pem                            \
                 --geoip-country-path country.mmdb                         \
                 --geoip-asn-path asn.mmdb                                 \
                 web_connectivity                                          \
                 -u http://mail.google.com
+        env:
+          extraoptions: "{{ matrix.extraoptions }}"
       - run: go run ./script/postprocess.go
