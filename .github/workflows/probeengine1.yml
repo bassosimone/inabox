@@ -14,10 +14,10 @@ jobs:
       fail-fast: false
       matrix:
         version:
-        - "v0.15.1"
-        - "v0.13.2"
+        - "v0.16.0" # 2.243656% of measurements (cli v3.0.7-beta.1) [2020-11-13]
         options:
         - "-o output/miniooni.jsonl"
+        - "--probe-services-url=https://ams-pg-test.ooni.org/ -o output/miniooni.jsonl"
     steps:
       - uses: actions/setup-go@v1
         with:
