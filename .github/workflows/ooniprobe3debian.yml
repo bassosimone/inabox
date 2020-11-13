@@ -18,4 +18,4 @@ jobs:
       - run: sudo apt update
       - run: sudo apt install ooniprobe-cli
       - run: ooniprobe onboard --yes
-      - run: ooniprobe ${{ matrix.extraoptions }} im
+      - run: ooniprobe ${{ matrix.extraoptions }} run im
