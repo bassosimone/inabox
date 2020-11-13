@@ -6,7 +6,7 @@ on:
   pull_request:
   push:
   schedule:
-    - cron: "30 */2 * * *"
+    - cron: "35 */8 * * *"
 jobs:
   test:
     runs-on: "ubuntu-18.04"

@@ -1,0 +1,20 @@
+name: ooniprobe3debian
+on:
+  pull_request:
+  push:
+  schedule:
+    - cron: "20 */8 * * *"
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        extraoptions:
+        - ""
+    steps:
+      - uses: actions/checkout@v2
+      - run: echo "deb [trusted=yes] https://dl.bintray.com/ooni/ooniprobe-debian/ unstable main" | sudo tee -a /etc/apt/sources.list.d/ooniprobe.list
+      - run: sudo apt update
+      - run: sudo apt install ooniprobe
+      - run: ooniprobe ${{ matrix.extraoptions }} im
