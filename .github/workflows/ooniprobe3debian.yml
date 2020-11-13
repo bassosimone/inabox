@@ -16,6 +16,6 @@ jobs:
       - uses: actions/checkout@v2
       - run: echo "deb [trusted=yes] https://dl.bintray.com/ooni/ooniprobe-debian/ unstable main" | sudo tee -a /etc/apt/sources.list.d/ooniprobe.list
       - run: sudo apt update
-      - run: sudo apt install ooniprobe
+      - run: sudo apt install ooniprobe-cli
       - run: ooniprobe onboard --yes
       - run: ooniprobe ${{ matrix.extraoptions }} im
