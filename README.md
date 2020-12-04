@@ -9,3 +9,5 @@ End to end testing of OONI probes and backends. Please see the [workflows](
 
 Initial analysis that informed the development of this repository is at
 https://github.com/ooni/backend/issues/446#issuecomment-697172389.
+
+Report issues for this repo at https://github.com/ooni/probe-engine/issues.
