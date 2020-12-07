@@ -2,6 +2,8 @@ name: ooniprobe3debian
 on:
   pull_request:
   push:
+    branches:
+      - main
   schedule:
     - cron: "20 */8 * * *"
 jobs:

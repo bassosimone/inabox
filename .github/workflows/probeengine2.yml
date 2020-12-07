@@ -5,6 +5,8 @@ name: "probeengine2"
 on:
   pull_request:
   push:
+    branches:
+      - main
   schedule:
     - cron: "35 */8 * * *"
 jobs:
