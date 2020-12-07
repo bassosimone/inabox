@@ -32,4 +32,4 @@ jobs:
       - run: ./miniooni ${{ matrix.options }} -i http://mail.google.com web_connectivity
       - run: ./miniooni ${{ matrix.options }} tor
       - run: ./miniooni ${{ matrix.options }} psiphon
-      - run: go run ./script/postprocess.go
+      - run: go run ./script/postprocess.go -expected 3

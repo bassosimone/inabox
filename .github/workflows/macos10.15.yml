@@ -45,4 +45,4 @@ jobs:
             -o ./output/https-test-infra.jsonl \
             web_connectivity -u http://mail.google.com
 
-      - run: go run ./script/postprocess.go
+      - run: go run ./script/postprocess.go -expected 4
