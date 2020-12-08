@@ -5,8 +5,6 @@ apt-get update
 apt-get install -y ooniprobe
 touch /var/lib/ooni/initialized
 
-ooniresources --update-inputs --update-geoip
-
 #
 # Limitation: we test the cloudfronted endpoint as a normal HTTPS endpoint.
 #
