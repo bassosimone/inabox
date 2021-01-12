@@ -9,6 +9,8 @@ name: macos10.15
 on:
   pull_request:
   push:
+    branches:
+      - main
   schedule:
     - cron: "10 */8* * *"
 jobs:
@@ -24,7 +26,7 @@ jobs:
       #
       # Limitation: the original cloudfronted endpoint is no longer available, thus
       # we are testing a new endpoint we setup for this purpose. See the error
-      # available in vagrant/debian9/boostrap.
+      # described in vagrant/debian9/boostrap.
       #
       - run: |
           brew install ooniprobe
@@ -45,4 +47,4 @@ jobs:
             -o ./output/https-test-infra.jsonl \
             web_connectivity -u http://mail.google.com
 
-      - run: go run ./script/postprocess.go
+      - run: go run ./script/postprocess.go -expected 4

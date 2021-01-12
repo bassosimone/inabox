@@ -10,6 +10,8 @@ name: debian9
 on:
   pull_request:
   push:
+    branches:
+      - main
   schedule:
     - cron: "0 */8 * * *"
 jobs:
@@ -19,6 +21,7 @@ jobs:
       fail-fast: false
       matrix:
         version:
+        - "ooniprobe_2.0.2" # re-added on 2020-12-07 for investigation purposes
         - "ooniprobe_2.1.0" # 47.933993% of measurements as of 2020-11-13
         - "ooniprobe_2.2.0" # ~4% of measurements as of 2020-11-13
         - "ooniprobe_2.3.0" # 2.470149 of measurements as of 2020-11-13
@@ -32,4 +35,4 @@ jobs:
         working-directory: ./vagrant/debian9
       - run: vagrant scp ${{ matrix.version }}:/vagrant/*.jsonl ../../output/
         working-directory: ./vagrant/debian9
-      - run: go run ./script/postprocess.go
+      - run: go run ./script/postprocess.go -expected 4

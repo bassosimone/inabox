@@ -10,6 +10,8 @@ name: libmk0.10.11
 on:
   pull_request:
   push:
+    branches:
+      - main
   schedule:
     - cron: "5 */8 * * *"
 jobs:
@@ -39,4 +41,4 @@ jobs:
                 --geoip-asn-path asn.mmdb                                 \
                 web_connectivity                                          \
                 -u http://mail.google.com
-      - run: go run ./script/postprocess.go
+      - run: go run ./script/postprocess.go -expected 1

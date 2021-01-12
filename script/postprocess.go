@@ -5,6 +5,7 @@ package main
 import (
 	"bytes"
 	"encoding/json"
+	"flag"
 	"io/ioutil"
 	"log"
 	"os"
@@ -28,6 +29,11 @@ type Measurement struct {
 }
 
 func main() {
+	expected := flag.Int("expected", 0, "Expected number of measurement files")
+	flag.Parse()
+	if *expected <= 0 {
+		log.Fatal("You MUST specify `-expected N`")
+	}
 	// based off https://flaviocopes.com/go-list-files/
 	var files []string
 	outputdir := "./output"
@@ -41,6 +47,7 @@ func main() {
 	if len(files) <= 0 {
 		log.Fatal("no files to process?!")
 	}
+	var found int
 	for _, file := range files {
 		data, err := ioutil.ReadFile(file)
 		fatalOnError(err)
@@ -59,6 +66,7 @@ func main() {
 				"-report-id",
 				entry.ReportID,
 			}
+			found++
 			if entry.Input != nil {
 				options = append(options, "-input")
 				options = append(options, *entry.Input)
@@ -69,5 +77,8 @@ func main() {
 			err = cmd.Run()
 			fatalOnError(err)
 		}
+	}
+	if found != *expected {
+		log.Fatalf("expected %d measurements, found %d measurements", *expected, found)
 	}
 }

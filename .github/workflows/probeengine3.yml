@@ -1,14 +1,14 @@
 # This contains a bit older versions of probe-engine that are reasonably
 # used by existing probe deployments as documented at
 # https://github.com/ooni/backend/issues/446#issuecomment-697172389.
-name: "probeengine2"
+name: "probeengine3"
 on:
   pull_request:
   push:
     branches:
       - main
   schedule:
-    - cron: "35 */8 * * *"
+    - cron: "40 */8 * * *"
 jobs:
   test:
     runs-on: "ubuntu-18.04"
@@ -16,10 +16,10 @@ jobs:
       fail-fast: false
       matrix:
         version:
-        - "v0.16.0" # 2.243656% of measurements (cli v3.0.7-beta.1) [2020-11-13]
+        - "v0.10.0" # 1.399000% of measurements as of 2020-11-13 (cli v3.0.0)
         options:
         - "-o output/miniooni.jsonl"
-        - "--probe-services-url=https://ams-pg-test.ooni.org/ -o output/miniooni.jsonl"
+        - "--bouncer=https://ams-pg-test.ooni.org/ -o output/miniooni.jsonl"
     steps:
       - uses: actions/setup-go@v1
         with:
