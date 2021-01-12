@@ -18,7 +18,6 @@ jobs:
       matrix:
         version:
         - "master"
-        - "v0.18.0"  # {ios,android} v2.7.0; desktop v3.0.4; cli v3.0.9 [2020-11-13]
         options:
         - "-o output/miniooni.jsonl"
         - "--probe-services=https://dvp6h0xblpcqp.cloudfront.net -o output/miniooni.jsonl"
@@ -31,7 +30,7 @@ jobs:
       - run: git clone https://github.com/ooni/probe-engine
       - run: cd probe-engine && git checkout "${{ matrix.version }}"
       - run: cd probe-engine && go build -o ../miniooni -v ./cmd/miniooni
-      - run: ./miniooni ${{ matrix.options }} -i http://mail.google.com web_connectivity
-      - run: ./miniooni ${{ matrix.options }} tor
-      - run: ./miniooni ${{ matrix.options }} psiphon
+      - run: ./miniooni --yes ${{ matrix.options }} -i http://mail.google.com web_connectivity
+      - run: ./miniooni --yes ${{ matrix.options }} tor
+      - run: ./miniooni --yes ${{ matrix.options }} psiphon
       - run: go run ./script/postprocess.go -expected 3
