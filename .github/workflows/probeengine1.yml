@@ -5,7 +5,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: "25 */8 * * *"
+    - cron: "30 */8 * * *"
 jobs:
   test:
     runs-on: "ubuntu-18.04"
