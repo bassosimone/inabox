@@ -26,7 +26,7 @@ jobs:
       #
       # Limitation: the original cloudfronted endpoint is no longer available, thus
       # we are testing a new endpoint we setup for this purpose. See the error
-      # available in vagrant/debian9/boostrap.
+      # described in vagrant/debian9/boostrap.
       #
       - run: |
           brew install ooniprobe

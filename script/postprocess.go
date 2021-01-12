@@ -29,7 +29,7 @@ type Measurement struct {
 }
 
 func main() {
-	expected := flag.Int("expected", 0, "Expected number of expected measurements")
+	expected := flag.Int("expected", 0, "Expected number of measurement files")
 	flag.Parse()
 	if *expected <= 0 {
 		log.Fatal("You MUST specify `-expected N`")
