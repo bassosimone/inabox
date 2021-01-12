@@ -4,7 +4,7 @@
 #
 # See also analysis at https://github.com/ooni/backend/issues/446#issuecomment-697172389.
 #
-# We still see 1.399000% of measurements as of 2020-11-13 coming from
+# We still see 1.25% of measurements as of 2021-01-12 coming from
 # cli v3.0.0. which includes MK v0.10.11.
 name: libmk0.10.11
 on:

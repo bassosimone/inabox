@@ -1,7 +1,7 @@
 # Not very popular among users but yet useful to garner confidence that
 # MK is WAI, modulo possible dependencies issues.
 #
-# As of 2020-11-13, we don't have any significant OONI client running MK
+# As of 2021-01-12, we don't have any significant OONI client running MK
 # but we know that there are many legacy clients running `ndt` using version
 # of MK compiled by people independently of OONI. So we are keeping this
 # workflow for now, to be sure we are not breaking this use case.
