@@ -3,8 +3,9 @@
 #
 # See also https://github.com/ooni/backend/issues/446#issuecomment-697172389
 #
-# Status as of 2020-11-13: https://github.com/ooni/backend/issues/461#issuecomment-726587481
-# where ooniprobe 2.3.0 on macos is 17.641921% of the measurements.
+# Status as of 2020-11-13: https://github.com/ooni/backend/issues/461#issuecomment-726587481.
+#
+# On 2021-01-12, ooniprobe 2.3.0 on macos is 14.6% of the measurements.
 name: macos10.15
 on:
   pull_request:
