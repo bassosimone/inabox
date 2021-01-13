@@ -35,4 +35,4 @@ jobs:
         working-directory: ./vagrant/debian9
       - run: vagrant scp ${{ matrix.version }}:/vagrant/*.jsonl ../../output/
         working-directory: ./vagrant/debian9
-      - run: go run ./script/postprocess.go -expected 4
+      - run: go run ./script/postprocess.go -expected 2
