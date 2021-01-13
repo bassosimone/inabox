@@ -31,13 +31,5 @@ touch /var/lib/ooni/initialized
 ooniprobe -P https -o /vagrant/https.jsonl \
     web_connectivity -u http://mail.google.com
 
-ooniprobe -P https --bouncer=https://dvp6h0xblpcqp.cloudfront.net \
-    -o ./output/cloudfront.jsonl \
-    web_connectivity -u http://mail.google.com
-
 ooniprobe -P onion -o /vagrant/onion.jsonl \
-    web_connectivity -u http://mail.google.com
-
-ooniprobe -P https --bouncer=https://ams-pg-test.ooni.org \
-    -o ./output/https-test-infra.jsonl \
     web_connectivity -u http://mail.google.com
