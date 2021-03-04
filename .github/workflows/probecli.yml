@@ -1,4 +1,4 @@
-name: "probeengine1"
+name: "probecli"
 on:
   pull_request:
   push:
@@ -27,7 +27,7 @@ jobs:
       - run: git clone https://github.com/ooni/probe-cli
       - run: cd probe-cli && git checkout "${{ matrix.version }}"
       - run: cd probe-cli && go build -o ../miniooni -v ./internal/cmd/miniooni
-      - run: ./miniooni ${{ matrix.options }} -i http://mail.google.com web_connectivity
-      - run: ./miniooni ${{ matrix.options }} tor
-      - run: ./miniooni ${{ matrix.options }} psiphon
+      - run: ./miniooni --yes ${{ matrix.options }} -i http://mail.google.com web_connectivity
+      - run: ./miniooni --yes ${{ matrix.options }} tor
+      - run: ./miniooni --yes ${{ matrix.options }} psiphon
       - run: go run ./script/postprocess.go -expected 3
