@@ -6,6 +6,8 @@
 # See also analysis at: https://github.com/ooni/backend/issues/446#issuecomment-697172389
 #
 # Status as of 2020-11-13: https://github.com/ooni/backend/issues/461#issuecomment-726587481.
+#
+# See comments below for more info.
 name: debian9
 on:
   pull_request:
@@ -21,10 +23,9 @@ jobs:
       fail-fast: false
       matrix:
         version:
-        - "ooniprobe_2.0.2" # (< 1%) re-added on 2020-12-07 for investigation purposes
-        - "ooniprobe_2.1.0" # ~36% of measurements as of 2021-03-04
-        - "ooniprobe_2.2.0" # ~4.5% of measurements as of 2021-03-04
-        - "ooniprobe_2.3.0" # ~11% of measurements as of 2021-03-04
+        - "ooniprobe_2.1.0" # ~34% of measurements as of 2021-04-07
+        - "ooniprobe_2.2.0" # ~4.3% of measurements as of 2021-04-07
+        - "ooniprobe_2.3.0" # ~7.5% of measurements as of 2021-03-04
     steps:
       - uses: actions/setup-go@v1
         with:
