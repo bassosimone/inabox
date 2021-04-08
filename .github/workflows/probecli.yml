@@ -27,6 +27,7 @@ jobs:
       - uses: actions/checkout@v2
       - run: git clone https://github.com/ooni/probe-cli
       - run: cd probe-cli && git checkout "${{ matrix.version }}"
+      - run: cd probe-cli && test -d ./internal/cmd/getresources && go run ./internal/cmd/getresources
       - run: cd probe-cli && go build -o ../miniooni -v ./internal/cmd/miniooni
       - run: ./miniooni --yes ${{ matrix.options }} -i http://mail.google.com web_connectivity
       - run: ./miniooni --yes ${{ matrix.options }} tor
