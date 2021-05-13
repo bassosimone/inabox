@@ -19,7 +19,7 @@ jobs:
       - uses: actions/checkout@v2
       - run: sudo apt-key adv --verbose --keyserver hkp://keyserver.ubuntu.com --recv-keys 'B5A08F01796E7F521861B449372D1FF271F2DD50'
       - run: echo "deb http://deb.ooni.org/ unstable main" | sudo tee /etc/apt/sources.list.d/ooniprobe.list
-      - run: sudo apt update
-      - run: sudo apt install ooniprobe-cli
+      - run: sudo apt-get update
+      - run: sudo apt-get install -y ooniprobe-cli
       - run: ooniprobe onboard --yes
       - run: ooniprobe ${{ matrix.extraoptions }} run im
