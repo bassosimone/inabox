@@ -23,9 +23,9 @@ jobs:
       fail-fast: false
       matrix:
         version:
-        - "ooniprobe_2.1.0" # ~34% of measurements as of 2021-04-07
-        - "ooniprobe_2.2.0" # ~4.3% of measurements as of 2021-04-07
-        - "ooniprobe_2.3.0" # ~7.5% of measurements as of 2021-03-04
+        - "ooniprobe_2.1.0" # ~27% of measurements as of 2021-05-13
+        - "ooniprobe_2.2.0" # ~2.4% of measurements as of 2021-05-13
+        - "ooniprobe_2.3.0" # ~5.0% of measurements as of 2021-05-13
     steps:
       - uses: actions/setup-go@v1
         with:
